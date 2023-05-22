@@ -17,9 +17,9 @@ public class FileDataReader {
    *
    * @param mdFiles - list of markdown files
    */
-  FileDataReader(ArrayList<MarkdownFile> mdFiles) {
+  FileDataReader(ArrayList<MarkdownFile> mdFiles, ArrayList<Question> questions) {
     this.mdFiles = mdFiles;
-    this.questions = new ArrayList<>();
+    this.questions = questions;
   }
 
   /**

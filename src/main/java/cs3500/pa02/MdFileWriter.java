@@ -12,6 +12,7 @@ import java.util.ArrayList;
 public class MdFileWriter {
   private final FileWriter writer;
   private final ArrayList<MarkdownFile> mdFiles;
+  private final ArrayList<Question> questions;
 
   /**
    * Constructor for MdFileWriter
@@ -23,6 +24,7 @@ public class MdFileWriter {
   public MdFileWriter(ArrayList<MarkdownFile> mdFiles, File output) throws IOException {
     writer = new FileWriter(output);
     this.mdFiles = mdFiles;
+    this.questions = new ArrayList<>();
 
   }
 
@@ -30,7 +32,7 @@ public class MdFileWriter {
    * Reads each file from the markdown file list and properly writes them to the output path
    */
   public void writeToFile() throws NoSuchFileException {
-    FileDataReader reader = new FileDataReader(this.mdFiles);
+    FileDataReader reader = new FileDataReader(this.mdFiles, this.questions);
     try {
       writer.write(reader.getFilteredData());
       writer.close();

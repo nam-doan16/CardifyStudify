@@ -34,9 +34,9 @@ class FileDataReaderTest {
 
     // noRWX.md is a file with no read, write, execute permissions
     invalid = new MarkdownFile(new File("lololol"));
-    reader = new FileDataReader(new ArrayList<>(List.of(file)));
-    emptyReader = new FileDataReader(new ArrayList<>(List.of(empty)));
-    invalidReader = new FileDataReader(new ArrayList<>(List.of(invalid)));
+    reader = new FileDataReader(new ArrayList<>(List.of(file)), new ArrayList<>());
+    emptyReader = new FileDataReader(new ArrayList<>(List.of(empty)), new ArrayList<>());
+    invalidReader = new FileDataReader(new ArrayList<>(List.of(invalid)), new ArrayList<>());
   }
 
   /**
