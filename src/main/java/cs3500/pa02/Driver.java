@@ -24,7 +24,7 @@ public class Driver {
   public static void main(String[] args) throws NoSuchFileException {
     if (ArgumentValidator.isValid(args)) {
       try {
-        MdFileWriter writer = new MdFileWriter(new MdInputProcessor(Path.of(args[0]),
+        FileDataWriter writer = new FileDataWriter(new MdInputProcessor(Path.of(args[0]),
             ArgumentValidator.parseOrder(args[1])).getMdFiles(), new File(args[2]));
         writer.writeToFile();
       } catch (IOException e) {

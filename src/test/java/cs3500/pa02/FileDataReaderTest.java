@@ -88,8 +88,10 @@ class FileDataReaderTest {
     assertEquals(reader.processString(test4), "- hello, world!");
 
     // testing question syntax
-    String questionSyntax = "1. [[What is Nam's last name?:::Doan]]";
-    assertEquals(reader.processString(questionSyntax), "1. ");
+    String questionSyntax = "1. [[What is Nam's last name?:::Doan]] hello";
+    String questionSyntax1 = "2. [[Hello:::World]]";
+    assertEquals(reader.processString(questionSyntax), "1.  hello");
+    assertEquals(reader.processString(questionSyntax1), "2. ");
 
   }
 }

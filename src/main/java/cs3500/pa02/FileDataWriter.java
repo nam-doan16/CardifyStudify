@@ -9,8 +9,9 @@ import java.util.ArrayList;
 /**
  * Represents a class that handles writing content to a file
  */
-public class MdFileWriter {
+public class FileDataWriter {
   private final FileWriter writer;
+  private final FileWriter srWriter;
   private final ArrayList<MarkdownFile> mdFiles;
   private final ArrayList<Question> questions;
 
@@ -21,8 +22,15 @@ public class MdFileWriter {
    * @param output - Output path and filename
    * @throws IOException - thrown if something goes wrong with the instantiation of writer
    */
-  public MdFileWriter(ArrayList<MarkdownFile> mdFiles, File output) throws IOException {
+  public FileDataWriter(ArrayList<MarkdownFile> mdFiles, File output) throws IOException {
     writer = new FileWriter(output);
+
+    // removing .md from output path
+    String outputSr = output.toString();
+    if (outputSr.contains(".md")) {
+      outputSr = outputSr.substring(0, outputSr.lastIndexOf(".")) + ".sr";
+    }
+    srWriter = new FileWriter(outputSr);
     this.mdFiles = mdFiles;
     this.questions = new ArrayList<>();
 
@@ -36,8 +44,16 @@ public class MdFileWriter {
     try {
       writer.write(reader.getFilteredData());
       writer.close();
+      this.writeQuestions();
     } catch (IOException e) {
       throw new NoSuchFileException("File not reachable");
     }
+  }
+
+  private void writeQuestions() throws IOException {
+    for (Question q : this.questions) {
+      srWriter.write(q.toString());
+    }
+    srWriter.close();
   }
 }

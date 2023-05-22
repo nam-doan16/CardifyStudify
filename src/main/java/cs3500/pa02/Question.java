@@ -52,7 +52,7 @@ public class Question {
   /**
    * Determines if this difficulty is the same as the given
    *
-   * @param other - other difficulty (EASY or HARD)
+   * @param other - other difficulty
    * @return boolean - whether the given difficulty is the same as this or not
    */
   public boolean compareDifficulty(Difficulty other) {
@@ -73,6 +73,15 @@ public class Question {
       this.difficulty = other;
       return true;
     }
+  }
+
+  /**
+   * Returns a markdown question syntax version of this question
+   *
+   * @return markdown syntax for questions and answers
+   */
+  public String toString() {
+    return "[[" + this.getQuestion() + ":::" + this.getAnswer() + "]]\n";
   }
 
 
