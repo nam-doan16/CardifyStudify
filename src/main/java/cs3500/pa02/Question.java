@@ -9,6 +9,16 @@ public class Question {
   private Difficulty difficulty;
 
   /**
+   * Constructor for Question for no specified difficulty
+   *
+   * @param question - represents a question with an answer
+   * @param answer - represents the answer to the given question
+   */
+  public Question(String question, String answer) {
+    this(question, answer, Difficulty.NONE);
+  }
+
+  /**
    * Constructor for Question
    *
    * @param question - represents a question with an answer

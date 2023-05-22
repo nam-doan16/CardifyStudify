@@ -30,7 +30,7 @@ public class MdFileWriter {
    * Reads each file from the markdown file list and properly writes them to the output path
    */
   public void writeToFile() throws NoSuchFileException {
-    MdFileReader reader = new MdFileReader(this.mdFiles);
+    FileDataReader reader = new FileDataReader(this.mdFiles);
     try {
       writer.write(reader.getFilteredData());
       writer.close();
