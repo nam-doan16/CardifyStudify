@@ -23,6 +23,19 @@ public class FileDataWriter {
    * @throws IOException - thrown if something goes wrong with the instantiation of writer
    */
   public FileDataWriter(ArrayList<MarkdownFile> mdFiles, File output) throws IOException {
+    this(mdFiles, output, new ArrayList<>());
+  }
+
+  /**
+   * Constructor for FileDataWriter that also takes in a list of questions
+   *
+   * @param mdFiles - list of markdown files
+   * @param output - output path and filename
+   * @param questions - list of questions
+   * @throws IOException - thrown if something goes wrong with the instantiation of writer
+   */
+  public FileDataWriter(ArrayList<MarkdownFile> mdFiles, File output,
+                        ArrayList<Question> questions) throws IOException {
     writer = new FileWriter(output);
 
     // removing .md from output path
@@ -32,7 +45,7 @@ public class FileDataWriter {
     }
     srWriter = new FileWriter(outputSr);
     this.mdFiles = mdFiles;
-    this.questions = new ArrayList<>();
+    this.questions = questions;
 
   }
 
@@ -50,7 +63,12 @@ public class FileDataWriter {
     }
   }
 
-  private void writeQuestions() throws IOException {
+  /**
+   * Writes questions from this list of questions to an SR file
+   *
+   * @throws IOException if reading/writing to the SR file fails
+   */
+  public void writeQuestions() throws IOException {
     for (Question q : this.questions) {
       srWriter.write(q.toString());
     }

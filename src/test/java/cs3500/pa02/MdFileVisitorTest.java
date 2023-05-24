@@ -91,7 +91,7 @@ class MdFileVisitorTest {
   }
 
   /**
-   * tets postVisitDirectory in MdFileVisitor
+   * tests postVisitDirectory in MdFileVisitor
    */
   @Test
   public void testPostVisitDirectory() {

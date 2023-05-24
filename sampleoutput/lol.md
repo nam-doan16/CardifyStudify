@@ -1,11 +1,3 @@
-# Nam Doan
-- How to spell "Nam Doan"
-- N-a-m D-o-a-n
-
-## Nam's Favorite Foods
-- Nam really
-enjoys eating sushi!!
-
 # Java Arrays
 - An **array** is a collection of variables of the same type, referred to
   by a common name.
@@ -30,6 +22,17 @@ enjoys eating sushi!!
 
 1. 
 
+# Hello
+- hello
+
+# Nam Doan
+- How to spell "Nam Doan"
+- N-a-m D-o-a-n
+
+## Nam's Favorite Foods
+- Nam really
+enjoys eating sushi!!
+
 # Vectors
 - Vectors act like resizable arrays.
 
@@ -43,7 +46,4 @@ enjoys eating sushi!!
 - v.add(object of type);
 
 - Reminder - go back and review clearing a vector!
-
-# Hello
-- hello
 

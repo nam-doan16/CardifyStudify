@@ -104,9 +104,10 @@ class FileDataWriterTest {
       e.printStackTrace();
     }
     String expected = """
-        [[What is your name?:::Test]]
+        [[What is your name?:::Test]]-HARD
         [[Hello:::
-        World]]
+        World]]-HARD
+        [[What is 3 + 3?:::6]]-EASY
         """;
     assertEquals(temp.toString(), expected);
   }

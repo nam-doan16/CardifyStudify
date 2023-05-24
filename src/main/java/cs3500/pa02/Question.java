@@ -15,7 +15,7 @@ public class Question {
    * @param answer - represents the answer to the given question
    */
   public Question(String question, String answer) {
-    this(question, answer, Difficulty.NONE);
+    this(question, answer, Difficulty.HARD);
   }
 
   /**
@@ -49,12 +49,6 @@ public class Question {
     return this.answer;
   }
 
-  /**
-   * Determines if this difficulty is the same as the given
-   *
-   * @param other - other difficulty
-   * @return boolean - whether the given difficulty is the same as this or not
-   */
   public boolean compareDifficulty(Difficulty other) {
     return this.difficulty == other;
   }
@@ -67,12 +61,11 @@ public class Question {
    * @return true if there was a switch, false if not
    */
   public boolean switchDifficulty(Difficulty other) {
-    if (this.compareDifficulty(other)) {
-      return false;
-    } else {
+    if (!this.compareDifficulty(other)) {
       this.difficulty = other;
       return true;
     }
+    return false;
   }
 
   /**
@@ -81,7 +74,7 @@ public class Question {
    * @return markdown syntax for questions and answers
    */
   public String toString() {
-    return "[[" + this.getQuestion() + ":::" + this.getAnswer() + "]]\n";
+    return "[[" + this.getQuestion() + ":::" + this.getAnswer() + "]]-" + this.difficulty + "\n";
   }
 
 

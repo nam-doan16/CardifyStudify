@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.NoSuchFileException;
 import java.util.Scanner;
 import org.junit.jupiter.api.Test;
 
@@ -43,7 +42,7 @@ class DriverTest {
 
     try {
       Driver.main(validArgs);
-    } catch (NoSuchFileException e) {
+    } catch (IOException e) {
       e.printStackTrace();
     }
 

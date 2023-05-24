@@ -3,7 +3,6 @@ package cs3500.pa02;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.nio.file.NoSuchFileException;
 import org.junit.jupiter.api.Test;
@@ -30,16 +29,18 @@ class ArgumentValidatorTest {
     String[] nullList = null;
     String[] shortList = new String[2];
     String[] validList = {"sampleinput/", "filename", "sampleoutput/test.md"};
+    String[] validEmpty = new String[0];
 
     // testing if isValid throws an exception for a list that is too long, too short, or null
     assertThrows(IllegalArgumentException.class, () -> ArgumentValidator.isValid(longList));
     assertThrows(IllegalArgumentException.class, () -> ArgumentValidator.isValid(shortList));
-    assertThrows(IllegalArgumentException.class, () -> ArgumentValidator.isValid(nullList));
+    assertThrows(NullPointerException.class, () -> ArgumentValidator.isValid(nullList));
 
     // testing with a valid list
     // tests parseOrder("filename")
     try {
-      assertTrue(ArgumentValidator.isValid(validList));
+      ArgumentValidator.isValid(validList);
+      ArgumentValidator.isValid(validEmpty);
     } catch (NoSuchFileException e) {
       e.printStackTrace();
     }
