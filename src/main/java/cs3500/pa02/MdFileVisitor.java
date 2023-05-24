@@ -17,6 +17,11 @@ import java.util.Objects;
 public class MdFileVisitor implements FileVisitor<Path> {
   private final ArrayList<MarkdownFile> files;
 
+  /**
+   * Constructor for MdFileVisitor
+   *
+   * @param files - list of markdown files
+   */
   public MdFileVisitor(ArrayList<MarkdownFile> files) {
     this.files = files;
   }

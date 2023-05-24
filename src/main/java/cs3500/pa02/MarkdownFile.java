@@ -24,6 +24,7 @@ public class MarkdownFile {
    * main constructor for MarkdownFile
    *
    * @param creationDate - represents the file's creation time
+   * @param lastModifiedTime - represents the file's last modified time
    * @param file - represents the file object of the markdown file
    */
   public MarkdownFile(FileTime creationDate, FileTime lastModifiedTime, File file) {

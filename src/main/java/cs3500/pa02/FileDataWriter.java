@@ -51,6 +51,7 @@ public class FileDataWriter {
 
   /**
    * Reads each file from the markdown file list and properly writes them to the output path
+   * @throws NoSuchFileException thrown if file doesn't exist/is unreachable
    */
   public void writeToFile() throws NoSuchFileException {
     FileDataReader reader = new FileDataReader(this.mdFiles, this.questions);

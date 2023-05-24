@@ -7,5 +7,7 @@ package cs3500.pa02;
  * MODIFIED - Represents files to be sorted by file modification time (ascending)
  */
 public enum Ordering {
-  FILENAME, CREATED, MODIFIED
+  FILENAME, // files to be sorted by filename
+  CREATED, // files to be sorted by file creation time
+  MODIFIED // files to be sorted by file modification time
 }

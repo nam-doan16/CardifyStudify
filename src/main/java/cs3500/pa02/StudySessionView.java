@@ -8,6 +8,11 @@ import java.util.Objects;
 public class StudySessionView {
   private final ConsoleWriter writer;
 
+  /**
+   * Constructor for StudySessionView
+   *
+   * @param output - Appendable object
+   */
   public StudySessionView(Appendable output) {
     this.writer = new ConsoleWriter(Objects.requireNonNull(output));
   }

@@ -49,6 +49,12 @@ public class Question {
     return this.answer;
   }
 
+  /**
+   * Compares this difficulty with the given difficulty
+   *
+   * @param other the other difficulty to be compared with
+   * @return whether this difficulty is the same as the given or not
+   */
   public boolean compareDifficulty(Difficulty other) {
     return this.difficulty == other;
   }

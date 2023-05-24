@@ -17,6 +17,7 @@ public class FileDataReader {
    * Constructor for MdFileReader
    *
    * @param mdFiles - list of markdown files
+   * @param questions - list of questions
    */
   public FileDataReader(ArrayList<MarkdownFile> mdFiles, ArrayList<Question> questions) {
     this.mdFiles = mdFiles;
@@ -27,9 +28,9 @@ public class FileDataReader {
    * returns a String containing filtered text from all markdown files
    *
    * @return filtered text from all markdown files in mdFiles
+   * @throws NoSuchFileException thrown if file isn't reachable
    */
   public String getFilteredData() throws NoSuchFileException {
-
     StringBuilder filteredData = new StringBuilder();
     for (MarkdownFile mdFile : this.mdFiles) {
       String tempString = this.getFileContents(mdFile.getFile());
