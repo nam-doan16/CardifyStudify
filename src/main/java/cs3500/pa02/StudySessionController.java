@@ -23,7 +23,7 @@ public class StudySessionController {
    */
   public StudySessionController(Readable input, Appendable output) throws IOException {
     this.setFields(input, output);
-    this.model = new StudySessionModel(this.inputFilePath(this.input));
+    this.model = new StudySessionModel(this.inputFilePath());
 
   }
 
@@ -49,8 +49,8 @@ public class StudySessionController {
    * @param output - Appendable object for output
    */
   private void setFields(Readable input, Appendable output) {
-    this.input = new Reader(input);
     this.view = new StudySessionView(output);
+    this.input = new Reader(input);
   }
 
   /**
@@ -59,7 +59,7 @@ public class StudySessionController {
    * @throws IOException thrown if there is a problem w/ reading/writing to the model's stored file
    */
   public void runStudySession() throws IOException {
-    int numQuestions = this.inputNumQuestions(this.input);
+    int numQuestions = this.inputNumQuestions();
     ArrayList<Question> generatedQuestions = model.generateQuestionSet(numQuestions, new Random());
     int inputChoice;
     int answerOrBack = 0;
@@ -96,11 +96,10 @@ public class StudySessionController {
    *
    * @return valid file object with the path and filename of an SR file
    */
-  private File inputFilePath(Reader input) {
+  private File inputFilePath() {
     File tempFile;
     view.printInputMessage("Input Path and Filename of your SR file:");
     tempFile = new File(input.read());
-    view.printMessage("");
     if (!tempFile.exists()) {
       throw new IllegalArgumentException("Invalid Path and Filename: " + tempFile);
     }
@@ -112,7 +111,7 @@ public class StudySessionController {
    *
    * @return valid integer > 0
    */
-  private int inputNumQuestions(Reader input) {
+  private int inputNumQuestions() {
     String numQuestionsStr;
     view.printInputMessage("Enter how many questions you want to answer:");
     numQuestionsStr = input.read();

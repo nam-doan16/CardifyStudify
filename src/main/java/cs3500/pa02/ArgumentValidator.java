@@ -84,6 +84,9 @@ public class ArgumentValidator {
    * @return if the given string is all numeric or not
    */
   public static boolean isPositiveNumber(String str) {
+    if (str.isBlank()) {
+      return false;
+    }
     for (char chr : str.toCharArray()) {
       if (!Character.isDigit(chr)) {
         return false;
