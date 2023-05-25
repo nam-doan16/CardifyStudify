@@ -11,8 +11,8 @@ import java.util.Random;
  */
 public class StudySessionController {
   private final StudySessionModel model;
-  private final StudySessionView view;
-  private final Reader input;
+  private IntfStudySessionView view;
+  private Reader input;
 
   /**
    * Constructor for StudySessionController
@@ -22,10 +22,35 @@ public class StudySessionController {
    * @throws IOException if the model's filepath is invalid
    */
   public StudySessionController(Readable input, Appendable output) throws IOException {
-    this.view = new StudySessionView(output);
-    this.input = new Reader(input);
-    this.model = new StudySessionModel(this.inputFilePath());
+    this.setFields(input, output);
+    this.model = new StudySessionModel(this.inputFilePath(this.input));
 
+  }
+
+  /**
+   * Constructor used for testing for StudySessionController
+   *
+   * @param input - Readable object responsible for handling data inputs
+   * @param output - Appendable object responsible for handling outputs to a user
+   * @param view - Viewing class (Mock for testing)
+   * @param model - Model with a specific file path
+   */
+  public StudySessionController(Readable input, Appendable output,
+                                IntfStudySessionView view, StudySessionModel model) {
+    this.setFields(input, output);
+    this.model = model;
+    this.view = view;
+  }
+
+  /**
+   * Set's the input and view fields based on the given parameters
+   *
+   * @param input - Readable object for user input
+   * @param output - Appendable object for output
+   */
+  private void setFields(Readable input, Appendable output) {
+    this.input = new Reader(input);
+    this.view = new StudySessionView(output);
   }
 
   /**
@@ -34,7 +59,7 @@ public class StudySessionController {
    * @throws IOException thrown if there is a problem w/ reading/writing to the model's stored file
    */
   public void runStudySession() throws IOException {
-    int numQuestions = this.inputNumQuestions();
+    int numQuestions = this.inputNumQuestions(this.input);
     ArrayList<Question> generatedQuestions = model.generateQuestionSet(numQuestions, new Random());
     int inputChoice;
     int answerOrBack = 0;
@@ -42,7 +67,7 @@ public class StudySessionController {
       // 1. Easy 2. Hard 3. Show Answer/Go Back 4. Exit
       inputChoice = view.getQuestion(q, input);
       if (inputChoice > 4 || inputChoice < 1) {
-        view.throwIllegalException("Invalid input choice: " + inputChoice);
+        throw new IllegalArgumentException("Invalid input choice: " + inputChoice);
       }
 
       while (inputChoice == 3) {
@@ -71,12 +96,13 @@ public class StudySessionController {
    *
    * @return valid file object with the path and filename of an SR file
    */
-  private File inputFilePath() {
+  private File inputFilePath(Reader input) {
     File tempFile;
     view.printInputMessage("Input Path and Filename of your SR file:");
     tempFile = new File(input.read());
+    view.printMessage("");
     if (!tempFile.exists()) {
-      view.throwIllegalException("Invalid Path and Filename: " + tempFile);
+      throw new IllegalArgumentException("Invalid Path and Filename: " + tempFile);
     }
     return tempFile;
   }
@@ -86,17 +112,13 @@ public class StudySessionController {
    *
    * @return valid integer > 0
    */
-  private int inputNumQuestions() {
+  private int inputNumQuestions(Reader input) {
     String numQuestionsStr;
     view.printInputMessage("Enter how many questions you want to answer:");
     numQuestionsStr = input.read();
-    if (!ArgumentValidator.isNumber(numQuestionsStr)) {
-      view.throwIllegalException("Invalid input!");
+    if (!ArgumentValidator.isPositiveNumber(numQuestionsStr)) {
+      throw new IllegalArgumentException("Invalid input: " + numQuestionsStr);
     }
-    int numQuestions = Integer.parseInt(numQuestionsStr);
-    if (numQuestions <= 0) {
-      view.throwIllegalException("Invalid number: " + numQuestions);
-    }
-    return numQuestions;
+    return Integer.parseInt(numQuestionsStr);
   }
 }

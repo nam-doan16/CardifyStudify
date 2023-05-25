@@ -78,12 +78,12 @@ public class ArgumentValidator {
   }
 
   /**
-   * Determines if the given string is a numeric number
+   * Determines if the given string is a positive numeric number
    *
    * @param str string to be checked
    * @return if the given string is all numeric or not
    */
-  public static boolean isNumber(String str) {
+  public static boolean isPositiveNumber(String str) {
     for (char chr : str.toCharArray()) {
       if (!Character.isDigit(chr)) {
         return false;

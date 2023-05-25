@@ -3,8 +3,10 @@ package cs3500.pa02;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Scanner;
 import org.junit.jupiter.api.Test;
 
@@ -47,17 +49,40 @@ class DriverTest {
     }
 
     // checking if test.main(validArgs) wrote the right contents to the file
-    String temp = "";
+    StringBuilder temp = new StringBuilder();
     try {
       Scanner fileScan = new Scanner(new File("sampleoutput/mainTesting.md"));
       while (fileScan.hasNextLine()) {
-        temp += fileScan.nextLine() + "\n";
+        temp.append(fileScan.nextLine()).append("\n");
       }
     } catch (IOException e) {
       e.printStackTrace();
     }
-    String expected = "# CS3500\n- It's crazy that were in OOD now!\n- HELLO!!!\nWORLD WOAHHHHHH"
-        + "\n\n";
-    assertEquals(temp, expected);
+    String expected = """
+        # CS3500
+        - It's crazy that were in OOD now!
+        - HELLO!!!
+        WORLD WOAHHHHHH
+
+        """;
+    assertEquals(temp.toString(), expected);
+  }
+
+  /**
+   * Testing Driver for the initial inputs for
+   */
+  @Test
+  public void testStudySessionMain() {
+    String input = "sampleinput/test.sr";
+    InputStream inputPath = new ByteArrayInputStream(input.getBytes());
+    System.setIn(inputPath);
+    // no args, bad input
+    String[] emptyArgs = {};
+    Exception e = assertThrows(NumberFormatException.class, () -> Driver.main(emptyArgs),
+        "For input string: \"\"");
+    assertEquals(e.getMessage(), "For input string: \"\"");
+    System.setIn(System.in);
+
+
   }
 }

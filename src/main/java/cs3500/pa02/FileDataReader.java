@@ -28,9 +28,10 @@ public class FileDataReader {
    * returns a String containing filtered text from all markdown files
    *
    * @return filtered text from all markdown files in mdFiles
-   * @throws NoSuchFileException thrown if file isn't reachable
+   * @throws NoSuchFileException thrown if file
    */
   public String getFilteredData() throws NoSuchFileException {
+
     StringBuilder filteredData = new StringBuilder();
     for (MarkdownFile mdFile : this.mdFiles) {
       String tempString = this.getFileContents(mdFile.getFile());
@@ -58,6 +59,7 @@ public class FileDataReader {
     while (fileReader.hasNextLine()) {
       tempString.append(fileReader.nextLine()).append("\n");
     }
+    fileReader.close();
 
     return this.processString(tempString + "\n");
   }

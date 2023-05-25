@@ -31,6 +31,7 @@ public class Reader {
     if (scanner.hasNextLine()) {
       output.append(scanner.nextLine());
     }
+    scanner.close();
     return output.toString();
   }
 }

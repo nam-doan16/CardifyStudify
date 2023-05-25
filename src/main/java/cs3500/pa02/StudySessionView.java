@@ -5,7 +5,7 @@ import java.util.Objects;
 /**
  * Represents a viewing class for a Study Session, responsible for handling outputs to the user
  */
-public class StudySessionView {
+public class StudySessionView implements IntfStudySessionView {
   private final ConsoleWriter writer;
 
   /**
@@ -15,15 +15,6 @@ public class StudySessionView {
    */
   public StudySessionView(Appendable output) {
     this.writer = new ConsoleWriter(Objects.requireNonNull(output));
-  }
-
-  /**
-   * Throws an IllegalArgumentException with the given string as a supplement for information
-   *
-   * @param str - Associated String with the Exception
-   */
-  public void throwIllegalException(String str) {
-    throw new IllegalArgumentException(str);
   }
 
   /**
@@ -80,8 +71,8 @@ public class StudySessionView {
     this.printMessage("\n1. Mark Easy\n2. Mark Hard\n3. " + thirdChoice + "\n4. Exit");
     this.printInputMessage("Choice:");
     String userInput = input.read();
-    if (!ArgumentValidator.isNumber(userInput)) {
-      this.throwIllegalException("Invalid input!");
+    if (!ArgumentValidator.isPositiveNumber(userInput)) {
+      throw new IllegalArgumentException("Invalid input!");
     }
     return Integer.parseInt(userInput);
   }

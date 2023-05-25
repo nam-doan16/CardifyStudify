@@ -1,8 +1,12 @@
 package cs3500.pa02;
 
 
+
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.nio.file.NoSuchFileException;
 import org.junit.jupiter.api.Test;
@@ -81,4 +85,16 @@ class ArgumentValidatorTest {
     // testing if any other string is given other than the three associated ones
     assertThrows(IllegalArgumentException.class, () -> ArgumentValidator.parseOrder("random"));
   }
+
+  /**
+   * Tests for isNumber
+   */
+  @Test
+  public void testIsNumber() {
+    assertTrue(ArgumentValidator.isPositiveNumber("123"));
+    assertFalse(ArgumentValidator.isPositiveNumber("ABC"));
+    assertFalse(ArgumentValidator.isPositiveNumber("123ABC"));
+    assertFalse(ArgumentValidator.isPositiveNumber("-1"));
+  }
+
 }

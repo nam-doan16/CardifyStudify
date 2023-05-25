@@ -1,6 +1,7 @@
 package cs3500.pa02;
 
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.StringReader;
 import org.junit.jupiter.api.BeforeEach;
@@ -34,6 +35,4 @@ class ReaderTest {
     this.reader = new Reader(this.readable);
     assertEquals(this.reader.read(), "");
   }
-
-
 }

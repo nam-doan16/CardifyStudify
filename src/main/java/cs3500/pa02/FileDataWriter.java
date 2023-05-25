@@ -10,10 +10,9 @@ import java.util.ArrayList;
  * Represents a class that handles writing content to a file
  */
 public class FileDataWriter {
-  private final FileWriter writer;
-  private final FileWriter srWriter;
   private final ArrayList<MarkdownFile> mdFiles;
   private final ArrayList<Question> questions;
+  private final File output;
 
   /**
    * Constructor for MdFileWriter
@@ -32,18 +31,10 @@ public class FileDataWriter {
    * @param mdFiles - list of markdown files
    * @param output - output path and filename
    * @param questions - list of questions
-   * @throws IOException - thrown if something goes wrong with the instantiation of writer
    */
   public FileDataWriter(ArrayList<MarkdownFile> mdFiles, File output,
-                        ArrayList<Question> questions) throws IOException {
-    writer = new FileWriter(output);
-
-    // removing .md from output path
-    String outputSr = output.toString();
-    if (outputSr.contains(".md")) {
-      outputSr = outputSr.substring(0, outputSr.lastIndexOf(".")) + ".sr";
-    }
-    srWriter = new FileWriter(outputSr);
+                        ArrayList<Question> questions) {
+    this.output = output;
     this.mdFiles = mdFiles;
     this.questions = questions;
 
@@ -51,11 +42,14 @@ public class FileDataWriter {
 
   /**
    * Reads each file from the markdown file list and properly writes them to the output path
+   *
    * @throws NoSuchFileException thrown if file doesn't exist/is unreachable
    */
   public void writeToFile() throws NoSuchFileException {
     FileDataReader reader = new FileDataReader(this.mdFiles, this.questions);
+
     try {
+      FileWriter writer = new FileWriter(output);
       writer.write(reader.getFilteredData());
       writer.close();
       this.writeQuestions();
@@ -70,6 +64,13 @@ public class FileDataWriter {
    * @throws IOException if reading/writing to the SR file fails
    */
   public void writeQuestions() throws IOException {
+    // removing .md from output path
+    String outputSr = output.toString();
+    if (outputSr.contains(".md")) {
+      outputSr = outputSr.substring(0, outputSr.lastIndexOf(".")) + ".sr";
+    }
+    FileWriter srWriter = new FileWriter(outputSr);
+
     for (Question q : this.questions) {
       srWriter.write(q.toString());
     }

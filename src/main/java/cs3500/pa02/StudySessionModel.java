@@ -105,7 +105,7 @@ public class StudySessionModel {
    */
   public ArrayList<Question> generateQuestionSet(int questions, Random rand) {
     ArrayList<Question> clonedQuestions = new ArrayList<>(this.questions);
-    Collections.shuffle(clonedQuestions);
+    Collections.shuffle(clonedQuestions, rand);
 
     if (questions > this.questions.size()) {
       return clonedQuestions;
