@@ -7,3 +7,9 @@ It include several additional tools:
 1. Gradle Build Automation
 1. JaCoCo for Test Coverage
 1. CheckStyle for Code Style Checks (Using the custom [cs3500 check file](./config/checkstyle/cs3500-checkstyle.xml)) 
+
+TAs who are grading:
+* My program accepts both SR files with and without METADATA,
+  * For SR files without metadata, all questions stored will be set default as hard, then the file will be overwritten
+    with the METADATA
+  * For SR files with metadata, it'll read it as normal and overwrite as normal

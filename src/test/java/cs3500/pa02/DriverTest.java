@@ -78,9 +78,9 @@ class DriverTest {
     System.setIn(inputPath);
     // no args, bad input
     String[] emptyArgs = {};
-    Exception e = assertThrows(NumberFormatException.class, () -> Driver.main(emptyArgs),
-        "For input string: \"\"");
-    assertEquals(e.getMessage(), "For input string: \"\"");
+    Exception e = assertThrows(IllegalArgumentException.class, () -> Driver.main(emptyArgs),
+        "Invalid input: ");
+    assertEquals(e.getMessage(), "Invalid input: ");
     System.setIn(System.in);
 
 
